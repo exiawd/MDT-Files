@@ -16,10 +16,9 @@ $MDTIPAddress = $TSEnv.Value("IPAddress001")
 
 #Time # Time 
 $DateTime = Get-Date -Format g 
-$Time = get-date -format HH:mm 
 
 # Computer Manufacturer 
-$Make = (Get-WmiObject -Class Win32_BIOS).Manufacturer 
+#$Make = (Get-WmiObject -Class Win32_BIOS).Manufacturer 
 
 # Computer Model 
 $Model = (Get-WmiObject -Class Win32_ComputerSystem).Model 
