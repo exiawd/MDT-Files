@@ -35,31 +35,6 @@ $MDTComputerName = $TSEnv.Value("OSDComputerName")
 $PhysicalRAM = (Get-WMIObject -class Win32_PhysicalMemory |Measure-Object -Property capacity -Sum | % {[Math]::Round(($_.sum / 1GB),2)})
 
 
-function Get-HardwareType {
-
-    $hardwaretype = Get-WmiObject -Class Win32_ComputerSystem -Property PCSystemType
-        If ($hardwaretype -eq 2)
-        {
-        return $true
-        }
-        Else
-        {
-        return $false
-        }}
-
-If (Get-HardwareType)
-{
-$hwtype = "Desktop"
-}
-Else
-{
-$hwtype = "Laptop"
-}
-
-
-
-
-
 $JSONBody = [PSCustomObject][Ordered]@{
     "@type"      = "MessageCard"
     "@context"   = "http://schema.org/extensions"
@@ -93,14 +68,6 @@ $JSONBody = [PSCustomObject][Ordered]@{
 						@{
 							"name"  = "IP Address"
 							"value" = $MDTIPAddress
-						},
-						@{
-							"name"  = "Completed on"
-							"value" = $DateTime
-						},
-						@{
-							"name"  = "Computer Type"
-							"value" = $hwtype
 						},
 						@{
 							"name"  = "Computer Model"
